@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Garima 💖</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin:0; padding:0; }
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  font-family: 'Playfair Display', serif;
+  background: linear-gradient(135deg, #5b1a23, #7b2a36, #5b1a23);
+  background-size: 400% 400%;
+  animation: gradientShift 25s ease infinite;
+}
+
+@keyframes gradientShift {0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+.frame { padding:14px; border-radius:45px; background:linear-gradient(270deg,gold,#ffec8b,gold); background-size:400% 400%; animation:glow 6s ease infinite;}
+@keyframes glow {0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+
+.card {background: rgba(0,0,0,0.25); border-radius:35px; padding:70px; max-width:750px; text-align:center; box-shadow:0 0 100px rgba(255,215,0,0.35); transition: all 1s ease;}
+.name { font-family:'Great Vibes',cursive; font-size:5rem; color:gold; text-shadow:0 0 20px rgba(255,215,0,0.9); margin-bottom:15px; background:linear-gradient(90deg,gold,#ffec8b,gold); -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation: shimmer 3s infinite; }
+@keyframes shimmer { 0%{background-position:-300px;}100%{background-position:300px;} }
+
+.text { font-size:1.45rem; color:#ffe8b0; line-height:1.9; margin-bottom:40px; text-shadow:0 0 6px rgba(0,0,0,0.5);}
+.text span { background:linear-gradient(90deg,gold,#ffd700,gold); -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation:shimmer 3s infinite; }
+
+.question { font-size:3rem; color:gold; margin-bottom:35px; text-shadow:0 0 10px rgba(0,0,0,0.5); }
+
+.buttons { position: relative; }
+button { padding:22px 65px; font-size:22px; border-radius:60px; border:none; cursor:pointer; margin:15px; font-family:'Playfair Display',serif; box-shadow:0 5px 25px rgba(0,0,0,0.3); transition: transform 0.3s ease, box-shadow 0.3s ease;}
+#yes { background: linear-gradient(45deg,gold,#ffec8b); color:#5b1a23; }
+#yes:hover { transform: scale(1.15); box-shadow:0 25px 60px rgba(255,215,0,0.9); }
+#no { position:absolute; background:white; color:#5b1a23; }
+
+/* Petals */
+.petal { position:absolute; width:14px; height:20px; background:linear-gradient(180deg,#ff4d6d,#b3002d); border-radius:50%; animation: fall 8s linear infinite; opacity:0.9;}
+@keyframes fall {0%{transform:translateY(-10vh) rotate(0deg);}100%{transform:translateY(110vh) rotate(360deg);}}
+
+/* Sparkles */
+.particle { position:absolute; width:4px; height:4px; background:gold; border-radius:50%; opacity:0.7; animation: sparkle 8s linear infinite; }
+@keyframes sparkle { 0%,100%{transform:translate(0,0) scale(0.5);opacity:0.6;}50%{transform:translate(20px,-20px) scale(1);opacity:1;} }
+
+/* Gifts & ribbons */
+.gift,.ribbon { position:absolute; font-size:28px; animation: floatGift 10s ease-in-out infinite; }
+@keyframes floatGift { 0%{transform:translateY(100vh) rotate(0deg);}50%{transform:translateY(0vh) rotate(180deg);}100%{transform:translateY(100vh) rotate(360deg);} }
+
+/* Confetti */
+.confetti { position:absolute;width:8px;height:8px;opacity:0.9; transform:rotate(45deg); animation: confettiFall 3s linear forwards; z-index:999; border-radius:2px;}
+@keyframes confettiFall { 0%{transform:translateY(0) rotate(0deg);opacity:1;}100%{transform:translateY(100vh) rotate(720deg);opacity:0;} }
+
+/* Fade in */
+.fadeIn { animation: fadeIn 1s ease forwards; opacity: 0; }
+@keyframes fadeIn { to { opacity:1; } }
+
+</style>
+</head>
+<body>
+<div class="frame">
+  <div class="card" id="homeCard">
+    <div class="name">Garima</div>
+    <div class="text">
+      Hey you 😏,<br>
+      You’ve been on my mind a lot lately… and I can’t help but smile thinking about you.<br>
+      So, I have a little question… one that could make our days a bit brighter and a lot more fun.<br>
+      <br>
+      Will you be my Valentine?
+    </div>
+    <div class="question">Will you be my Valentine?</div>
+    <div class="buttons">
+      <button id="yes">Yes</button>
+      <button id="no">No</button>
+    </div>
+  </div>
+</div>
+
+<audio id="music" loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3">
+</audio>
+
+<script>
+const noBtn=document.getElementById("no");
+const yesBtn=document.getElementById("yes");
+const music=document.getElementById("music");
+let scale=1;
+let sparkles=[], gifts=[];
+
+// Petals
+for(let i=0;i<50;i++){
+  const p=document.createElement("div");
+  p.className="petal";
+  p.style.left=Math.random()*100+"vw";
+  p.style.animationDuration=(Math.random()*3+5)+"s";
+  document.body.appendChild(p);
+}
+
+// Sparkles all over
+for(let i=0;i<150;i++){
+  const g=document.createElement("div");
+  g.className="particle";
+  g.style.left=Math.random()*100+"vw";
+  g.style.top=Math.random()*100+"vh";
+  g.style.animationDuration=(Math.random()*5+3)+"s";
+  g.style.animationName="sparkle";
+  document.body.appendChild(g);
+  sparkles.push(g);
+}
+
+// Gifts & Ribbons
+const symbols=["🎁","🎀"];
+for(let i=0;i<20;i++){
+  const s=document.createElement("div");
+  s.className=i%2===0?"gift":"ribbon";
+  s.innerText=symbols[i%2];
+  s.style.left=Math.random()*100+"vw";
+  s.style.animationDuration=(Math.random()*5+6)+"s";
+  document.body.appendChild(s);
+  gifts.push(s);
+}
+
+// Sparkle drifting effect
+setInterval(()=>{
+  sparkles.forEach(s=>{
+    let top=parseFloat(s.style.top);
+    let left=parseFloat(s.style.left);
+    top += (Math.random()*1-0.5);
+    left += (Math.random()*1-0.5);
+    s.style.top = top+"px";
+    s.style.left = left+"px";
+  });
+},50);
+
+// NO hover
+noBtn.addEventListener("mouseover",()=>{
+  scale-=0.08;
+  noBtn.style.transform=`scale(${scale})`;
+  noBtn.style.left=Math.random()*300-150+"px";
+  noBtn.style.top=Math.random()*140-70+"px";
+});
+
+// YES click
+yesBtn.addEventListener("click",()=>{
+  music.play();
+  const homeCard=document.getElementById("homeCard");
+  homeCard.style.transition="all 1s ease";homeCard.style.opacity="0";homeCard.style.transform="scale(0.95)";
+
+  // Confetti burst
+  for(let i=0;i<200;i++){
+    const c=document.createElement("div");
+    c.className="confetti";
+    c.style.left=Math.random()*100+"vw";
+    c.style.backgroundColor=["gold","#ff4d6d","#ffb6c1"][Math.floor(Math.random()*3)];
+    c.style.animationDuration=(Math.random()*2+2)+"s";
+    document.body.appendChild(c);
+  }
+
+  setTimeout(()=>{
+    document.body.innerHTML=`
+      <div class="fadeIn">
+        <h1 style="color:gold;font-family:'Great Vibes';font-size:4.8rem;text-align:center;">Thanks, Garima ❤️</h1>
+        <p style="color:#ffe8b0;font-family:'Playfair Display';font-size:1.95rem;text-align:center;max-width:700px;margin:auto;">
+          I promise no awkwardness, just fun, laughter, and tiny sparks.<br>
+          I’m looking forward to our little adventures together — discovering silly things, sharing smiles, and maybe a bit of playful mischief.<br>
+          You’re amazing, Garima, and I can’t wait to see where this goes.<br>
+          Every moment with you feels special, and I hope this Valentine’s makes you smile as much as you make me. 😌
+        </p>
+      </div>`;
+
+    // Petals
+    for(let i=0;i<150;i++){const p=document.createElement("div");p.className="petal";p.style.left=Math.random()*100+"vw";p.style.animationDuration=(Math.random()*3+4)+"s";document.body.appendChild(p);}
+    // Sparkles
+    for(let i=0;i<90;i++){const g=document.createElement("div");g.className="particle";g.style.left=Math.random()*100+"vw";g.style.top=Math.random()*100+"vh";g.style.animationDuration=(Math.random()*5+3)+"s";document.body.appendChild(g);}
+    // Gifts & ribbons
+    for(let i=0;i<20;i++){const s=document.createElement("div");s.className=i%2===0?"gift":"ribbon";s.innerText=symbols[i%2];s.style.left=Math.random()*100+"vw";s.style.animationDuration=(Math.random()*5+6)+"s";document.body.appendChild(s);}
+  },1000);
+});
+</script>
+</body>
+</html>
